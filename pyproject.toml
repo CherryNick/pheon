@@ -1,0 +1,72 @@
+[project]
+name = "pheon-rest-api"
+version = "0.1.0"
+description = "REST API for pheon"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "aiosqlite>=0.21.0",
+    "bcrypt>=4.3.0",
+    "factory-boy>=3.3.3",
+    "fastapi>=0.115.12",
+    "greenlet>=3.2.1",
+    "httpx>=0.28.1",
+    "passlib>=1.7.4",
+    "pydantic-settings>=2.9.1",
+    "pyjwt>=2.10.1",
+    "python-json-logger>=3.3.0",
+    "sqlalchemy>=2.0.40",
+    "uvicorn>=0.34.2",
+]
+
+[dependency-groups]
+dev = [
+    "asgi-lifespan>=2.1.0",
+    "mypy>=1.15.0",
+    "pytest>=8.3.5",
+    "pytest-asyncio>=0.26.0",
+    "ruff>=0.11.7",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test*.py"
+addopts = ["--import-mode=importlib"]
+pythonpath = "."
+
+
+[tool.ruff]
+src = ["src"]
+lint.select = [
+    "B", "E", "F", "I", "ANN", "ASYNC", "S", "COM", "C", "ISC", "PIE", "PT", "Q", "TID", "ARG", "PLE", "PLR", "PLW",
+    "RUF"
+]
+lint.ignore = [
+    "RUF100", "RUF001", "RUF002", "PLR0913", "ANN401", "PLR2004", "S101", "S608", "S324", "PLW2901", "RUF009"
+]
+lint.fixable = [
+    "A", "B", "C", "D", "E", "F", "G", "I", "N", "Q", "S", "T", "W", "ANN", "ARG", "BLE", "COM", "DJ", "DTZ", "EM",
+    "ERA", "EXE", "FBT", "ICN", "INP", "ISC", "NPY", "PD", "PGH", "PIE", "PL", "PT", "PTH", "PYI", "RET", "RSE", "RUF",
+    "SIM", "SLF", "TCH", "TID", "TRY", "UP", "YTT"
+]
+lint.unfixable = []
+exclude = [
+    ".bzr", ".direnv", ".eggs", ".git", ".git-rewrite", ".hg", ".mypy_cache", ".nox", ".pants.d", ".pytype",
+    ".ruff_cache", ".svn", ".tox", ".venv", "__pypackages__", "_build", "buck-out", "build", "dist",
+    "node_modules", "venv",
+]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402", "F401"]
+
+[tool.ruff.lint.flake8-quotes]
+docstring-quotes = "double"
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+known-first-party = ["src"]
